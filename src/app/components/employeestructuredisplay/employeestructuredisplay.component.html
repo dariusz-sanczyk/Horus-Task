@@ -9,7 +9,7 @@
     </option>
   </select>
   <div class="hierarchy-vertical">
-    <ng-container *ngFor="let emp of emmployeeHierarchyTree; let last = last">
+    <ng-container *ngFor="let emp of employeeHierarchyTree; let last = last">
       <div class="employee-box">{{ emp.firstName }} {{ emp.lastName }}</div>
       <ng-container *ngIf="!last">
         <div class="arrow-down">↓</div>

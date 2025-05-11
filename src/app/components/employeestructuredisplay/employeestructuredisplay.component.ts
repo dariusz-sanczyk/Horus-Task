@@ -12,7 +12,7 @@ export class EmployeestructuredisplayComponent implements OnInit {
   public employees: Employee[] = [];
   public selectedEmployeeId: string = '';
   public employeeHierarchy!: EmployeeTree;
-  public emmployeeHierarchyTree: Employee[] | null = [];
+  public employeeHierarchyTree: Employee[] | null = [];
 
   constructor(private employeeService: EmployeeService) {};
 
@@ -23,9 +23,9 @@ export class EmployeestructuredisplayComponent implements OnInit {
 
 
   public onSelect(event: Event) {
-    this.emmployeeHierarchyTree = [];
+    this.employeeHierarchyTree = [];
     this.selectedEmployeeId = (event.target as HTMLSelectElement).value;
-    this.emmployeeHierarchyTree = this.findEmployeeTree(this.selectedEmployeeId, this.employeeHierarchy);
+    this.employeeHierarchyTree = this.findEmployeeTree(this.selectedEmployeeId, this.employeeHierarchy);
   };
 
   private findEmployeeTree(employeeId: string, employeeHierarchy: EmployeeTree): Employee[] | null {
