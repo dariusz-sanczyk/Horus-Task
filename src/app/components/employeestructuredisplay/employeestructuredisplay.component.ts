@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from 'src/app/models/employee.model';
+import { Employee, EmployeeTree } from 'src/app/models/employee.model';
 import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
@@ -9,12 +9,21 @@ import { EmployeeService } from 'src/app/services/employee.service';
 })
 export class EmployeestructuredisplayComponent implements OnInit {
 
-  employees: Employee[] = [];
+  public employees: Employee[] = [];
+  public selectedEmployeeId!: string;
+  public employeeHierarchy!: EmployeeTree;
 
   constructor(private employeeService: EmployeeService) {};
 
   ngOnInit() {
     this.employeeService.getEmployees().subscribe(employees => this.employees = employees);
+    this.employeeService.getEmployeeHierarchy().subscribe(employeeHierarchy => this.employeeHierarchy = employeeHierarchy);
   };
 
+
+  public onSelect(event: Event) {
+    this.selectedEmployeeId = (event.target as HTMLSelectElement).value;
+    console.log(this.selectedEmployeeId);
+    console.log(this.employeeHierarchy);
+  };
 };

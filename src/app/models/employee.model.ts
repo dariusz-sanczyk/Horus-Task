@@ -3,3 +3,7 @@ export interface Employee {
     firstName: string;
     lastName: string;
 };
+
+export interface EmployeeTree extends Employee {
+    subordinates: EmployeeTree[];
+};
