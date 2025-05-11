@@ -10,7 +10,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
 export class EmployeestructuredisplayComponent implements OnInit {
 
   public employees: Employee[] = [];
-  public selectedEmployeeId!: string;
+  public selectedEmployeeId: string = '';
   public employeeHierarchy!: EmployeeTree;
   public emmployeeHierarchyTree: Employee[] | null = [];
 
