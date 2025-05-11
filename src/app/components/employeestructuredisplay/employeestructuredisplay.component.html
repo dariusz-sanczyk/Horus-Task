@@ -1,9 +1,19 @@
-<select (change)="onSelect($event)">
-  <option value="">Choose employee...</option>
-  <option *ngFor="let emp of employees" [value]="emp.id">
-    {{ emp.firstName }} {{ emp.lastName }}
-  </option>
-</select>
-<span *ngFor="let emp of emmployeeHierarchyTree; let last = last">
-  {{ emp.firstName }} {{ emp.lastName }}<span *ngIf="!last"> → </span>
-</span>
+<div class="container">
+  <label for="employeeSelect"
+    >Select Employee to display hierarchy representation.</label
+  >
+  <select id="employeeSelect" (change)="onSelect($event)">
+    <option value="">Choose employee...</option>
+    <option *ngFor="let emp of employees" [value]="emp.id">
+      {{ emp.firstName }} {{ emp.lastName }}
+    </option>
+  </select>
+  <div class="hierarchy-vertical">
+    <ng-container *ngFor="let emp of emmployeeHierarchyTree; let last = last">
+      <div class="employee-box">{{ emp.firstName }} {{ emp.lastName }}</div>
+      <ng-container *ngIf="!last">
+        <div class="arrow-down">↓</div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
