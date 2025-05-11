@@ -4,3 +4,6 @@
     {{ emp.firstName }} {{ emp.lastName }}
   </option>
 </select>
+<span *ngFor="let emp of emmployeeHierarchyTree; let last = last">
+  {{ emp.firstName }} {{ emp.lastName }}<span *ngIf="!last"> → </span>
+</span>

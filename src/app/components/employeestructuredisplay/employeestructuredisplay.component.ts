@@ -12,7 +12,7 @@ export class EmployeestructuredisplayComponent implements OnInit {
   public employees: Employee[] = [];
   public selectedEmployeeId!: string;
   public employeeHierarchy!: EmployeeTree;
-  public selectedEmployeeHierarchy: EmployeeTree | null = null;
+  public emmployeeHierarchyTree: Employee[] = [];
 
   constructor(private employeeService: EmployeeService) {};
 
@@ -24,18 +24,24 @@ export class EmployeestructuredisplayComponent implements OnInit {
 
   public onSelect(event: Event) {
     this.selectedEmployeeId = (event.target as HTMLSelectElement).value;
-    this.selectedEmployeeHierarchy = this.findEmployee(this.selectedEmployeeId, this.employeeHierarchy)
+    this.findEmployeeTree(this.selectedEmployeeId, this.employeeHierarchy);
     console.log(this.selectedEmployeeId);
     console.log(this.employeeHierarchy);
-    console.log(this.selectedEmployeeHierarchy);
+    console.log(this.emmployeeHierarchyTree);
 
   };
 
-  private findEmployee(employeeId: string, employeeHierarchy: EmployeeTree): EmployeeTree | null {
-    if (employeeHierarchy.id === employeeId) return employeeHierarchy;
+  private findEmployeeTree(employeeId: string, employeeHierarchy: EmployeeTree): EmployeeTree | null {
+    if (employeeHierarchy.id === employeeId) {
+      this.emmployeeHierarchyTree.unshift({ firstName: employeeHierarchy.firstName, lastName: employeeHierarchy.lastName });
+      return employeeHierarchy;
+    }
     for (const subordinate of employeeHierarchy.subordinates) {
-      const employeeFound = this.findEmployee(employeeId, subordinate);
-      if (employeeFound) return employeeFound;
+      const employeeFound = this.findEmployeeTree(employeeId, subordinate);
+      if (employeeFound) {
+        this.emmployeeHierarchyTree.unshift({ firstName: employeeHierarchy.firstName, lastName: employeeHierarchy.lastName });
+        return employeeFound;
+      }
     };
     return null;
   };
